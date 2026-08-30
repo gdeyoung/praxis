@@ -20,6 +20,12 @@ Praxis documents our operational experience. Where that experience started from 
 
 - Qwen3.8-Flash-Next vLLM support PR — community contribution under review: [vllm-project/vllm#53896](https://github.com/vllm-project/vllm/pull/53896)
 
+## Heritage
+
+| Project | Note |
+|---|---|
+| ClearVoice | Evolved from an earlier "krisp-linux" meeting-recorder concept; GPL-3.0 lineage retained. Independent PyQt6 application. |
+
 ## Standing note
 
 If you find your work referenced here without adequate credit, open an issue and it will be fixed promptly. Measurement results published in this repo are our own, produced on our hardware; any errors in them are also our own.
