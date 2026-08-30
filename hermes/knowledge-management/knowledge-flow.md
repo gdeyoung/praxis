@@ -55,7 +55,7 @@ Collapsing them into one store means either your graph queries are slow or your 
 1. **Extract** — nightly, sessions are mined for structured observations (attribute/value/confidence) by the local model.
 2. **Dream** — the memory graph is analyzed: pattern distribution, knowledge hubs, recurring observations, staleness. Output: scored insights + a human-readable report. Confidence decays on a 30-day half-life; below-threshold entities archive rather than delete.
 3. **Act** — high-priority insights land in a review queue; recurring error patterns (3+ occurrences) surface as "codify this into a skill" recommendations to the curator.
-4. **Curate** — the only path into procedural skills runs through schema validation and review (see [agent-skill-patterns.md](../hermes/agent-skill-patterns.md) §7).
+4. **Curate** — the only path into procedural skills runs through schema validation and review (see [agent-skill-patterns.md](../agent-skill-patterns.md) §7).
 
 ## Governance rules that keep it honest
 
