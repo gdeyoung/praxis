@@ -1,0 +1,34 @@
+# praxis
+
+> Knowledge through practice — hard-won lessons from running a self-hosted AI agent fleet on real hardware.
+
+Everything in this repo was **measured on our own silicon, benchmarked with open scripts, and survived production traffic.** No benchmarks-from-a-slideshare, no vibes. Where we benefited from someone else's work, we say so explicitly ([ATTRIBUTION.md](ATTRIBUTION.md)).
+
+## Why this exists
+
+Most public AI-agent content is either vendor demos or single-session experiments. Almost nobody publishes what happens *after* the demo: the deployment traps, the benchmark methodology bugs, the memory-system design that actually survives months of daily agent traffic. This repo is that layer — the operator's education, paid for in failed transfers, silent degradations, and cold-cache boot times.
+
+## Contents
+
+| Area | What's there |
+|---|---|
+| [`models/`](models/) | Serving recipes we run in production, with verification gates and honest numbers — start with [Qwen3.8-Flash-Next on a single DGX Spark](models/qwen3.8-flash-next/) |
+| [`memory/braindb.md`](memory/braindb.md) | **BrainDB** — a SQLite-native agent memory system with vector search, graph traversal, nightly reflection ("dreaming"), and confidence decay. Fully undocumented until now. |
+| [`LINKS.md`](LINKS.md) | Curated resources that earned a bookmark: recipes, checkpoints, tools, and the reference posts we actually learned from |
+
+### Roadmap (content exists, sanitization in progress)
+
+- `hermes/` — multi-profile agent fleet patterns: routing, delegation, skills
+- `agent-zero/` — custom skills and dashboards for Agent Zero deployments
+- `sparks/` — DGX Spark operations: GPU management, power events, model swaps
+
+## The house rules
+
+1. **Numbers or it didn't happen.** Every performance claim comes with the script that produced it.
+2. **Failures are the content.** A lesson that didn't cost anything is usually wrong.
+3. **Attribution upstream.** Recipes and checkpoints get named, linked, and credited — see [ATTRIBUTION.md](ATTRIBUTION.md).
+4. **Nothing private ships.** No IPs, hostnames, credentials, or customer data ever.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Attribution-noted upstream work remains the property of its authors.
