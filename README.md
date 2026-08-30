@@ -23,6 +23,7 @@ Most public AI-agent content is either vendor demos or single-session experiment
 ## Recent additions
 
 - [`hermes/fleet-operations.md`](hermes/fleet-operations.md) — multi-profile fleet patterns: the dependency map discipline, model routing by task shape, autonomous learning loops, change control
+- [`hermes/agent-skill-patterns.md`](hermes/agent-skill-patterns.md) — seven skill patterns that survived production: decision queue, knowledge preamble, blue-green runtime upgrades, structured handoff, edit-in-place rule, hard escalation, curator separation
 - [`sparks/field-notes.md`](sparks/field-notes.md) — DGX Spark ops: power-event failure modes, blue-green model swaps, Docker-vs-native NCCL, cluster pairing
 
 ## The house rules
