@@ -4,7 +4,7 @@ Rough numbers, honestly labeled: what a self-hosted agent fleet costs to run ver
 
 ## The stack being costed
 
-A dozen agent profiles (dev, research, media, ops, QA, security, chief-of-staff…) on six servers: two mid-range GPU servers, two DGX Spark-class compact boxes, two storage/service boxes, all bought used or at launch pricing over three years. Local models served via a router proxy with cloud fallback for SOTA tasks.
+A dozen agent profiles (dev, research, media, ops, QA, security…) on six servers: two mid-range GPU servers, two DGX Spark-class compact boxes, two storage/service boxes, all bought used or at launch pricing over three years. Local models served via a router proxy with cloud fallback for SOTA tasks.
 
 ## Capital vs operating (the honest table)
 

@@ -53,7 +53,7 @@ vault path, index domain, or "session only."
 | **Orchestrator hubs** | architect, research-lead | Plan, split, dispatch, verify, integrate — hold judgment, not task work |
 | **Dev workers** | backend, frontend, sre, data | Production code and infra per the dev-team template; report with evidence |
 | **Researchers** | tech, market, academic, osint, data-analyst | Source-tiered research with confidence labels and cited gaps |
-| **Specialists** | media, qa, security, sysadmin, chief-of-staff | Domain depth: pipelines, quality gates, threat models, ops, exec throughput |
+| **Specialists** | media, qa, security, sysadmin | Domain depth: pipelines, quality gates, threat models, ops |
 | **Autonomous** | learners (fleet, work), curator, improvement-scanner | Scheduled unattended cycles; learners never write skills, curator is the sole skill-writer |
 
 The full role definitions (with models, toolsets, and standards per role) live in the fleet's ops handbook — the shape above is everything you need to rebuild them on your own stack. Start with two roles (one orchestrator, one worker), get the delegation loop solid, then add specialists as real work demands them. A role created before its workload exists is inventory.
