@@ -23,7 +23,7 @@ market signals      ──▶  monitor, correlate, escalate    ──▶  weekly
 
 **2. The pipeline loop.** Deal/account data exports get parsed into a standard shape, stacked by stage and momentum, and turned into a forecast with reasoning attached — not a black-box number. Each deal carries a one-line "why it's at risk / why it moves." The output is a review-ready stack, every data point with its one-line explanation. (House rule from the human: *every* data point gets one line of explanation, or it doesn't ship.)
 
-**3. The market loop.** The same autonomous-learner machinery described in [learning-workflows](../knowledge-management/learning-workflows.md), pointed at the exec's market: competitors, regulators, the accounts' industries. Signals mature across weeks on watch lists; the chief-of-staff correlates them with the pipeline ("that acquisition closes a competitive gap for exactly the deals in stage 3") and escalates when a window opens or closes.
+**3. The market loop.** The same autonomous-learner machinery described in [learning-workflows](../hermes/knowledge-management/learning-workflows.md), pointed at the exec's market: competitors, regulators, the accounts' industries. Signals mature across weeks on watch lists; the chief-of-staff correlates them with the pipeline ("that acquisition closes a competitive gap for exactly the deals in stage 3") and escalates when a window opens or closes.
 
 **4. The briefing loop.** Everything funnels into a weekly executive briefing — pipeline movement, market shifts, meetings that mattered, decisions pending — each item with the evidence link. The briefing is assembled from structured stores, not written from vibes, which is why it's consistent week over week.
 
@@ -44,7 +44,7 @@ One reply from the human — from any surface, whenever — executes it. The age
 ## What makes it work (the honest list)
 
 1. **A real transcription path.** The loop lives or dies on meeting capture. Local, diarized, speaker-labeled — the speaker library matters more than you'd think for "who committed to what."
-2. **Structured stores, not chat history.** Everything extracted lands in queryable stores with admission tests (see [knowledge-flow](../knowledge-management/knowledge-flow.md)). A chief-of-staff that remembers only through conversation context is a goldfish with a title.
+2. **Structured stores, not chat history.** Everything extracted lands in queryable stores with admission tests (see [knowledge-flow](../hermes/knowledge-management/knowledge-flow.md)). A chief-of-staff that remembers only through conversation context is a goldfish with a title.
 3. **Fixed digest formats.** Same shape every day, same briefing every week. Consistency is what lets the human skim at speed — novelty in formatting is friction.
 4. **The one-line-explanation rule.** Every number, every alert: one line of why. It forces the agent to understand what it's surfacing, and gives the human an audit trail.
 5. **Bounded autonomy with pre-drafted actions.** All preparation, no irrevocable execution. This keeps the trust asymmetric in the right direction: the agent works 24/7, the human decides in minutes.
