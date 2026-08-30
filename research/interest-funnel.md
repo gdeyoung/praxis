@@ -31,7 +31,7 @@ IDEATION ── mature signals become project/content candidates
 
 **3. Extract the interest pattern.** Periodically (weekly), the agent analyzes the accumulated corpus: category distribution, save-rate trends, source quality (what you save from repeatedly), engagement (what you actually return to). Output is an explicit interest model — categories with weights, sources ranked, gaps named. This model is *derived from behavior*, not from what you'd claim you care about. The two differ, and the behavioral one is the better predictor.
 
-**4. Stand up recurring trackers.** Each durable interest gets a standing watch (the same machinery as [learning-workflows](../knowledge-management/learning-workflows.md)): the agent monitors the release feeds, the legislative trackers, the competitor channels, and reports only deltas. Interest + watch = the agent knowing about the thing before you needed to ask.
+**4. Stand up recurring trackers.** Each durable interest gets a standing watch (the same machinery as [learning-workflows](../hermes/knowledge-management/learning-workflows.md)): the agent monitors the release feeds, the legislative trackers, the competitor channels, and reports only deltas. Interest + watch = the agent knowing about the thing before you needed to ask.
 
 **5. Digest the delta.** Daily: what changed across your trackers, what's newly saved worth attention, what matured. Ranked by the interest model, capped in length. The digest earns its slot in the morning or it gets tuned — readership is tracked the same way everything else is.
 
