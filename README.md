@@ -12,8 +12,12 @@ Most public AI-agent content is either vendor demos or single-session experiment
 
 | Area | What's there |
 |---|---|
-| [`models/`](models/) | Serving recipes we run in production, with verification gates and honest numbers — start with [Qwen3.8-Flash-Next on a single DGX Spark](models/qwen3.8-flash-next/) |
+| [`models/`](models/) | Serving recipes we run in production, with verification gates and honest numbers — start with [Qwen3.8-Flash-Next on a single DGX Spark](models/qwen3.8-flash-next/), plus [deploy-watch](models/deploy-watch.md) |
+| [`agents/`](agents/) | **Recreate our fleet** — the [role template](agents/ROLE-TEMPLATE.md) every agent/subagent is defined by, the role catalog, and the [de-identified chief-of-staff](agents/chief-of-staff.md) writeup |
 | [`hermes/`](hermes/) | **The Hermes fleet** — operating patterns, agent skill patterns, and the full knowledge-management architecture (below) |
+| [`search/`](search/) | [Tiered web access](search/web-access.md) — routing, fallback chains, and quality-drift detection for search backends |
+| [`media/`](media/) | [Verification-gated media generation](media/verification-gates.md) — zero-stumble narration, subtitle constraints, hardware encode, pre-production spend gates |
+| [`research/`](research/) | [The interest funnel](research/interest-funnel.md) — from a saved-link hoard to an agent that knows what you care about |
 | [`LINKS.md`](LINKS.md) | Curated resources that earned a bookmark: recipes, checkpoints, tools, and the reference posts we actually learned from |
 
 ### Roadmap (content exists, sanitization in progress)
@@ -27,6 +31,9 @@ Everything about running the agent platform itself:
 | Doc | What it covers |
 |---|---|
 | [`hermes/fleet-operations.md`](hermes/fleet-operations.md) | Multi-profile fleet patterns: dependency-map discipline, model routing by task shape, autonomous learning loops, change control |
+| [`hermes/delegation-mechanics.md`](hermes/delegation-mechanics.md) | How a parent supervises workers: live transcripts, done-markers, bounded parallelism, YAML-defined councils, when not to delegate |
+| [`hermes/external-harness-wiring.md`](hermes/external-harness-wiring.md) | Wiring an external coding harness (OpenCode/Claude Code/Codex class) as a callable dev subagent — the four-requirement socket |
+| [`hermes/fleet-economics.md`](hermes/fleet-economics.md) | The cost model: owned silicon vs API-only, where cloud is genuinely cheaper, routing rules that stop silent cost drift |
 | [`hermes/agent-skill-patterns.md`](hermes/agent-skill-patterns.md) | Seven skill patterns that survived production: decision queue, knowledge preamble, blue-green runtime upgrades, structured handoff, edit-in-place rule, hard escalation, curator separation |
 | [`hermes/knowledge-management/braindb.md`](hermes/knowledge-management/braindb.md) | **BrainDB** — SQLite-native agent memory with vector search, graph traversal, nightly reflection ("dreaming"), and confidence decay |
 | [`hermes/knowledge-management/knowledge-flow.md`](hermes/knowledge-management/knowledge-flow.md) | The full knowledge architecture — seven stores with admission tests and matched half-lives, the reflection loop, and the document layer that started on open-source Elasticsearch |
