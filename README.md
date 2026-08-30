@@ -18,9 +18,12 @@ Most public AI-agent content is either vendor demos or single-session experiment
 
 ### Roadmap (content exists, sanitization in progress)
 
-- `hermes/` — multi-profile agent fleet patterns: routing, delegation, skills
 - `agent-zero/` — custom skills and dashboards for Agent Zero deployments
-- `sparks/` — DGX Spark operations: GPU management, power events, model swaps
+
+## Recent additions
+
+- [`hermes/fleet-operations.md`](hermes/fleet-operations.md) — multi-profile fleet patterns: the dependency map discipline, model routing by task shape, autonomous learning loops, change control
+- [`sparks/field-notes.md`](sparks/field-notes.md) — DGX Spark ops: power-event failure modes, blue-green model swaps, Docker-vs-native NCCL, cluster pairing
 
 ## The house rules
 
