@@ -30,6 +30,7 @@ Everything about running the agent platform itself:
 | [`hermes/agent-skill-patterns.md`](hermes/agent-skill-patterns.md) | Seven skill patterns that survived production: decision queue, knowledge preamble, blue-green runtime upgrades, structured handoff, edit-in-place rule, hard escalation, curator separation |
 | [`hermes/knowledge-management/braindb.md`](hermes/knowledge-management/braindb.md) | **BrainDB** — SQLite-native agent memory with vector search, graph traversal, nightly reflection ("dreaming"), and confidence decay |
 | [`hermes/knowledge-management/knowledge-flow.md`](hermes/knowledge-management/knowledge-flow.md) | The full knowledge architecture — seven stores with admission tests and matched half-lives, the reflection loop, and the document layer that started on open-source Elasticsearch |
+| [`hermes/knowledge-management/learning-workflows.md`](hermes/knowledge-management/learning-workflows.md) | Autonomous learning workflows — the scheduled night-shift learners: fixed 4-unit cycles, tier-ranked persistence, watch lists, self-audit, and the rules that keep ~130 unattended cycles trustworthy |
 - [`sparks/field-notes.md`](sparks/field-notes.md) — DGX Spark ops: power-event failure modes, blue-green model swaps, Docker-vs-native NCCL, cluster pairing
 
 ## The house rules
