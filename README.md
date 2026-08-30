@@ -13,18 +13,23 @@ Most public AI-agent content is either vendor demos or single-session experiment
 | Area | What's there |
 |---|---|
 | [`models/`](models/) | Serving recipes we run in production, with verification gates and honest numbers — start with [Qwen3.8-Flash-Next on a single DGX Spark](models/qwen3.8-flash-next/) |
-| [`memory/braindb.md`](memory/braindb.md) | **BrainDB** — a SQLite-native agent memory system with vector search, graph traversal, nightly reflection ("dreaming"), and confidence decay. Fully undocumented until now. |
-| [`memory/knowledge-flow.md`](memory/knowledge-flow.md) | The full knowledge architecture — seven stores with admission tests and matched half-lives, the reflection loop, and why the document layer started on open-source Elasticsearch |
+| [`hermes/`](hermes/) | **The Hermes fleet** — operating patterns, agent skill patterns, and the full knowledge-management architecture (below) |
 | [`LINKS.md`](LINKS.md) | Curated resources that earned a bookmark: recipes, checkpoints, tools, and the reference posts we actually learned from |
 
 ### Roadmap (content exists, sanitization in progress)
 
 - `agent-zero/` — custom skills and dashboards for Agent Zero deployments
 
-## Recent additions
+## The Hermes fleet section
 
-- [`hermes/fleet-operations.md`](hermes/fleet-operations.md) — multi-profile fleet patterns: the dependency map discipline, model routing by task shape, autonomous learning loops, change control
-- [`hermes/agent-skill-patterns.md`](hermes/agent-skill-patterns.md) — seven skill patterns that survived production: decision queue, knowledge preamble, blue-green runtime upgrades, structured handoff, edit-in-place rule, hard escalation, curator separation
+Everything about running the agent platform itself:
+
+| Doc | What it covers |
+|---|---|
+| [`hermes/fleet-operations.md`](hermes/fleet-operations.md) | Multi-profile fleet patterns: dependency-map discipline, model routing by task shape, autonomous learning loops, change control |
+| [`hermes/agent-skill-patterns.md`](hermes/agent-skill-patterns.md) | Seven skill patterns that survived production: decision queue, knowledge preamble, blue-green runtime upgrades, structured handoff, edit-in-place rule, hard escalation, curator separation |
+| [`hermes/knowledge-management/braindb.md`](hermes/knowledge-management/braindb.md) | **BrainDB** — SQLite-native agent memory with vector search, graph traversal, nightly reflection ("dreaming"), and confidence decay |
+| [`hermes/knowledge-management/knowledge-flow.md`](hermes/knowledge-management/knowledge-flow.md) | The full knowledge architecture — seven stores with admission tests and matched half-lives, the reflection loop, and the document layer that started on open-source Elasticsearch |
 - [`sparks/field-notes.md`](sparks/field-notes.md) — DGX Spark ops: power-event failure modes, blue-green model swaps, Docker-vs-native NCCL, cluster pairing
 
 ## The house rules
