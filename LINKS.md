@@ -2,7 +2,9 @@
 
 Curated, not comprehensive. Everything here was used on real hardware in this fleet and earned its place. (Related: [ATTRIBUTION.md](ATTRIBUTION.md) for work praxis builds on.)
 
-## Serving recipes (DGX Spark / GB10)
+## Serving recipes
+- tonyd2wild — [GLM-5.3-Flash-NVFP4-DFlash2-2x-DGX-Spark](https://github.com/tonyd2wild/GLM-5.3-Flash-NVFP4-DFlash2-2x-DGX-Spark) — the recipe this fleet's [GLM-5.3 deployment](models/glm-5.3-flash/) is built on; seven day-0 fixes, patched SM121 image
+- RedHatAI — [GLM-5.3-Flash-NVFP4](https://huggingface.co/RedHatAI/GLM-5.3-Flash-NVFP4) — corruption-free NVFP4 checkpoint (DGX Spark / GB10)
 
 - [blazux/qwen3.8-Flash-DGX](https://github.com/blazux/qwen3.8-Flash-DGX) — single-Spark Qwen3.8-Flash-Next recipe; the hybrid fp8 side-layer conversion writeup is the best quantization-bandwidth analysis we've read
 - [tonyd2wild's repos](https://github.com/tonyd2wild?tab=repositories) — DS4F deployments and Spark tooling (2Wild-Beast, Model-Eval, DeepSeek-Harness series); his config discipline is the standard we hold ourselves to
