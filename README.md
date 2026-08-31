@@ -12,7 +12,7 @@ Most public AI-agent content is either vendor demos or single-session experiment
 
 | Area | What's there |
 |---|---|
-| [`models/`](models/) | Serving recipes we run in production, with verification gates and honest numbers — start with [Qwen3.8-Flash-Next on a single DGX Spark](models/qwen3.8-flash-next/), plus [deploy-watch](models/deploy-watch.md) |
+| [`models/`](models/) | Serving recipes we run in production, with verification gates and honest numbers — [Qwen3.8-Flash-Next on a single DGX Spark](models/qwen3.8-flash-next/), [GLM-5.3-Flash on a 2-node Spark cluster](models/glm-5.3-flash/), plus [deploy-watch](models/deploy-watch.md) |
 | [`agents/`](agents/ROLE-TEMPLATE.md) | **Recreate our fleet** — the [role template](agents/ROLE-TEMPLATE.md) every agent/subagent is defined by, plus the role catalog |
 | [`hermes/`](hermes/) | **The Hermes fleet** — operating patterns, agent skill patterns, and the full knowledge-management architecture (below) |
 | [`search/`](search/) | [Tiered web access](search/web-access.md) — routing, fallback chains, and quality-drift detection for search backends |

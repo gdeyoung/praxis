@@ -13,6 +13,8 @@ Praxis documents our operational experience. Where that experience started from 
 
 | Checkpoint | Publisher | Where |
 |---|---|---|
+| GLM-5.3-Flash NVFP4 recipe + SM121-patched image | **tonyd2wild** | [github.com/tonyd2wild/GLM-5.3-Flash-NVFP4-DFlash2-2x-DGX-Spark](https://github.com/tonyd2wild/GLM-5.3-Flash-NVFP4-DFlash2-2x-DGX-Spark) |
+| GLM-5.3-Flash NVFP4 checkpoint | **RedHatAI** | [huggingface.co/RedHatAI/GLM-5.3-Flash-NVFP4](https://huggingface.co/RedHatAI/GLM-5.3-Flash-NVFP4) |
 | Qwen3.8-Flash-Next NVFP4 | **RadixArk** | [huggingface.co/RadixArk/Qwen3.8-Flash-Next-NVFP4](https://huggingface.co/RadixArk/Qwen3.8-Flash-Next-NVFP4) |
 | Qwen3.8-Flash-Next (official) | Qwen team | [huggingface.co/Qwen/Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) |
 
