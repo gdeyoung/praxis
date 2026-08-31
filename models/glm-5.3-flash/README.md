@@ -30,7 +30,7 @@ vllm serve /models/glm-5.3-flash-nvfp4
 
 ## Verified numbers (usage-based, 2026-08-30)
 
-Per our [benchmark methodology](../benchmarks/): count `usage.completion_tokens`, never SSE chunks — DFlash2 packs multiple tokens per stream event and event-counting reads roughly a third of true speed.
+Per our [benchmark methodology](../qwen3.8-flash-next/benchmarks/): count `usage.completion_tokens`, never SSE chunks — DFlash2 packs multiple tokens per stream event and event-counting reads roughly a third of true speed.
 
 | Check | Result |
 |---|---|
