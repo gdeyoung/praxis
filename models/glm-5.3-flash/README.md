@@ -8,7 +8,7 @@ Our production deployment record for GLM-5.3-Flash (NVFP4, 320B-class MoE) serve
 |---|---|
 | Container image | `ghcr.io/tonyd2wild/vllm-glm53-flash:sm121-v11-dflash2` (31.2 GB) |
 | Checkpoint | [RedHatAI/GLM-5.3-Flash-NVFP4](https://huggingface.co/RedHatAI/GLM-5.3-Flash-NVFP4) (185 GB per node) |
-| Drafter (spec decode) | `incoai/GLM-5.3-Flash-DFlash2` (2.2 GB) — DFlash2, 7 speculative tokens |
+| Drafter (spec decode) | `incoai/GLM-5.3-Flash-DFlash2` (2.2 GB) — DFlash2, 5 speculative tokens (tuned from 7) |
 | Topology | 2 nodes, TP2, `mp` executor; head serves :8000, worker joins over a private RoCE v2 link |
 | Interconnect | The two Sparks' on-board 200 Gb RoCE ports on a dedicated subnet |
 
@@ -20,9 +20,9 @@ vllm serve /models/glm-5.3-flash-nvfp4
   --tensor-parallel-size 2 --distributed-executor-backend mp --nnodes 2
   --gpu-memory-utilization 0.85 --max-model-len 262144
   --max-num-seqs 6 --block-size 2304 --max-num-batched-tokens 8192
-  --moe-backend marlin --kv-cache-dtype fp8_e4m3 --kv-cache-memory 3221225472
+  --moe-backend marlin --kv-cache-dtype fp8_e4m3 --kv-cache-memory 6442450944
   --enforce-eager
-  --speculative-config {"method":"dflash","model":"/models/dflash2-draft","num_speculative_tokens":7}
+  --speculative-config {"method":"dflash","model":"/models/dflash2-draft","num_speculative_tokens":5}
   --tool-call-parser glm47 --enable-auto-tool-choice --reasoning-parser glm45
   --default-chat-template-kwargs {"enable_thinking":false}
   --chat-template /models/glm-5.3-flash-nvfp4/chat_template_mm.jinja
@@ -30,7 +30,7 @@ vllm serve /models/glm-5.3-flash-nvfp4
 
 ## Verified numbers (usage-based, 2026-08-30)
 
-Per our [benchmark methodology](../qwen3.8-flash-next/benchmarks/): count `usage.completion_tokens`, never SSE chunks — DFlash2 packs multiple tokens per stream event and event-counting reads roughly a third of true speed.
+Per our [benchmark methodology](../benchmarks/): count `usage.completion_tokens`, never SSE chunks — DFlash2 packs multiple tokens per stream event and event-counting reads roughly a third of true speed.
 
 | Check | Result |
 |---|---|
@@ -42,7 +42,29 @@ Per our [benchmark methodology](../qwen3.8-flash-next/benchmarks/): count `usage
 | Tool call (OpenAI format) | Correct JSON args (`{"city": "Chicago"}`) via `glm47` parser |
 | Health → usable | 760 s cold boot (JIT + weight load) — see [deploy-watch](../deploy-watch.md) for why the poll budget must exceed this |
 
-Context: this replaced a DeepSeek-V4-Flash deployment that hit 78 tok/s after tuning passes. GLM-5.3-Flash trades some single-stream speed for better tool-use, reasoning, and hallucination behavior on our workloads. First-night numbers; no tuning passes yet.
+Context: this replaced a DeepSeek-V4-Flash deployment that hit 78 tok/s after tuning passes. GLM-5.3-Flash trades some single-stream speed for better tool-use, reasoning, and hallucination behavior on our workloads.
+
+## Tuning pass 1 (2026-08-31) — KV 6 GiB + k=5
+
+Adopted from the upstream repo's community tuning study (issue #11) with the maintainer's follow-up analysis (#12), applied as two sequenced gated changes — one variable per relaunch, full verification between.
+
+| Change | Before | After | Why |
+|---|---|---|---|
+| `--kv-cache-memory` | 3 GiB | 6 GiB | KV pool 310K→643K tokens; the load-bearing fix for concurrency on TP2 |
+| `num_speculative_tokens` | 7 | 5 | Acceptance decays hard past draft position 3; k=5 keeps ~86% of accepted tokens while cutting 28% of draft+verify compute |
+
+Measured on our harness (usage-based, salted mixed prompts, 400-token generations):
+
+| Workload | Baseline | After both |
+|---|---|---|
+| C1 (single-stream) | 44.1 tok/s | 42.1 tok/s |
+| C4 (4 concurrent) | 44.5 tok/s | **53.2 tok/s** |
+| C6 (6 concurrent) | 62.3 tok/s | **67.6 tok/s** |
+| 6 × 61.5K-token prompts (369K tokens KV demand) | exceeds old pool — preemption regime | **zero errors, zero preemptions** |
+
+Single-stream within noise (upstream documents ±30% single-pass swing on this hardware); the durable wins are concurrency and the elimination of preemption under long-context load. The 369K-token test is the one that matters: it's 119% of the old pool's capacity — the workload shape that used to force evict-and-recompute.
+
+Quality gates after each change: determinism byte-identical at T=0, tool-call JSON clean, coherence clean, zero preemptions in logs.
 
 ## The five localization fixes (our contribution to the recipe's story)
 
