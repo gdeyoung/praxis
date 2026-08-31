@@ -40,7 +40,7 @@ Per our [benchmark methodology](../qwen3.8-flash-next/benchmarks/): count `usage
 | Determinism (T=0, repeated) | Byte-identical |
 | Coherence | Clean prose, no degeneration at 256 tokens |
 | Tool call (OpenAI format) | Correct JSON args (`{"city": "Chicago"}`) via `glm47` parser |
-| Health → usable | 760 s cold boot (JIT + weight load) — see [deploy-watch](deploy-watch.md) for why the poll budget must exceed this |
+| Health → usable | 760 s cold boot (JIT + weight load) — see [deploy-watch](../deploy-watch.md) for why the poll budget must exceed this |
 
 Context: this replaced a DeepSeek-V4-Flash deployment that hit 78 tok/s after tuning passes. GLM-5.3-Flash trades some single-stream speed for better tool-use, reasoning, and hallucination behavior on our workloads. First-night numbers; no tuning passes yet.
 
@@ -49,7 +49,7 @@ Context: this replaced a DeepSeek-V4-Flash deployment that hit 78 tok/s after tu
 The recipe works, but it ships *the author's* fabric and workflow. Five things we had to fix — any second deployer hits all five:
 
 1. **Exec bits**: `git clone` drops the executable bit on the recipe's shell scripts — `chmod +x` before anything else, or scripts fail with confusing permission errors.
-2. **Fabric values**: the recipe hardcodes the author's subnet, RoCE version, and GID index. Ours differ (ours: RoCE v1, different GID index, different address range). Derive yours from `ibdev2netdev` on both nodes and **use the same ACTIVE port on both** — name instability across reboots is a known trap (see [our field notes](../sparks/field-notes.md)).
+2. **Fabric values**: the recipe hardcodes the author's subnet, RoCE version, and GID index. Ours differ (ours: RoCE v1, different GID index, different address range). Derive yours from `ibdev2netdev` on both nodes and **use the same ACTIVE port on both** — name instability across reboots is a known trap (see [our field notes](../../sparks/field-notes.md)).
 3. **Remote worker launch**: the recipe assumes two terminals, a human at each. If you script the cutover, the wrapper must SSH to the worker for rank 1 — launching it locally just runs a second head, which fails late and confusingly.
 4. **Chat template location**: `chat_template_mm.jinja` lives in the recipe repo, not the HF checkpoint download — copy it into the model dir (or point `--chat-template` at the recipe path).
 5. **hf_hub API churn**: `huggingface_hub` 1.16.1 removed the legacy `huggingface_cli` entry point — download weights with `snapshot_download()`, not the CLI the older scripts assume.
