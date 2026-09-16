@@ -6,7 +6,8 @@ Praxis documents our operational experience. Where that experience started from 
 
 | What | Author | Where | How we use it |
 |---|---|---|---|
-| Single-DGX-Spark Qwen3.8-Flash-Next recipe (NVFP4 + MTP + hybrid fp8 mode) | **blazux** | [github.com/blazux/qwen3.8-Flash-DGX](https://github.com/blazux/qwen3.8-Flash-DGX) | Starting point for our production serving config on one DGX Spark. We added verification gates, benchmark methodology, and fleet integration. Repo has no license file at time of writing — we link and credit rather than copy. |
+| Single-DGX-Spark Qwen3.8-Flash-Next recipe (NVFP4 + MTP + hybrid fp8 mode) | **blazux** | [github.com/blazux/qwen3.8-Flash-DGX](https://github.com/blazux/qwen3.8-Flash-DGX) | Starting point for our production serving config on one DGX Spark. We added verification gates, benchmark methodology, and fleet integration. Apache-2.0. |
+| Qwen3.8-Flash-Next reduced-vocab MTP draft (65,536-token corpus vocab overlay) | **tonyd2wild** | [github.com/tonyd2wild/Qwen3.8-Flash-Next-NVFP4-DGX-Spark](https://github.com/tonyd2wild/Qwen3.8-Flash-Next-NVFP4-DGX-Spark) | Source of the draft-vocab overlay in our Flash-Next lane (measured +17% decode on our nodes via reverse A/B). Apache-2.0. |
 | DS4F (DeepSeek-V4-Flash) NVFP4-KV deployment recipes & DGX Spark tooling | **tonyd2wild** | [github.com/tonyd2wild?tab=repositories](https://github.com/tonyd2wild?tab=repositories) | Reference for our two-node Spark cluster deployments (DeepSeek-Harness series, 2Wild-Beast, 2Wild-Model-Eval). |
 
 ## Model checkpoints
