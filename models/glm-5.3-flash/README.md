@@ -8,7 +8,7 @@ Our production deployment record for GLM-5.3-Flash (NVFP4, 320B-class MoE) serve
 |---|---|
 | Container image | `ghcr.io/tonyd2wild/vllm-glm53-flash:sm121-v11-dflash2` (31.2 GB) |
 | Checkpoint | [RedHatAI/GLM-5.3-Flash-NVFP4](https://huggingface.co/RedHatAI/GLM-5.3-Flash-NVFP4) (185 GB per node) |
-| Drafter (spec decode) | `incoai/GLM-5.3-Flash-DFlash2` (2.2 GB) — DFlash2, 5 speculative tokens (tuned from 7) |
+| Drafter (spec decode) | `incoai/GLM-5.3-Flash-DFlash2` (2.2 GB) — DFlash2, 7 speculative tokens (re-tuned 2026-09-16, see pass 2) |
 | Topology | 2 nodes, TP2, `mp` executor; head serves :8000, worker joins over a private RoCE v2 link |
 | Interconnect | The two Sparks' on-board 200 Gb RoCE ports on a dedicated subnet |
 
@@ -22,7 +22,7 @@ vllm serve /models/glm-5.3-flash-nvfp4
   --max-num-seqs 6 --block-size 2304 --max-num-batched-tokens 8192
   --moe-backend marlin --kv-cache-dtype fp8_e4m3 --kv-cache-memory 6442450944
   --enforce-eager
-  --speculative-config {"method":"dflash","model":"/models/dflash2-draft","num_speculative_tokens":5}
+  --speculative-config {"method":"dflash","model":"/models/dflash2-draft","num_speculative_tokens":7}
   --tool-call-parser glm47 --enable-auto-tool-choice --reasoning-parser glm45
   --default-chat-template-kwargs {"enable_thinking":false}
   --chat-template /models/glm-5.3-flash-nvfp4/chat_template_mm.jinja
@@ -65,6 +65,46 @@ Measured on our harness (usage-based, salted mixed prompts, 400-token generation
 Single-stream within noise (upstream documents ±30% single-pass swing on this hardware); the durable wins are concurrency and the elimination of preemption under long-context load. The 369K-token test is the one that matters: it's 119% of the old pool's capacity — the workload shape that used to force evict-and-recompute.
 
 Quality gates after each change: determinism byte-identical at T=0, tool-call JSON clean, coherence clean, zero preemptions in logs.
+
+## Tuning pass 2 (2026-09-16) — k back to 7, prefix cache repaired
+
+Two changes, same day, each gated:
+
+### k 5 → 7 (acceptance-regime retune)
+
+Sixteen days after pass 1, the engine's per-position acceptance counters told a different story: ~100/97/96/91/90% at draft positions 0-4 (mean 4.75 of 5 tokens accepted per step). The decay-past-position-3 regime that justified k=5 was gone — spec-decode acceptance is a *measured* quantity, not a set-and-forget, so the depth gets re-tuned whenever the acceptance curve shifts.
+
+| Workload | k=5 | k=7 |
+|---|---|---|
+| Structured decode (single-stream) | 54.5 tok/s | **64.9 tok/s (+19%)** |
+| Prose decode (single-stream) | 30.3 tok/s | 30.1 tok/s (flat — the accept-collapsed lane, as expected) |
+| C4 (4 concurrent) | 53.2 tok/s | 55.3 tok/s (holds) |
+| C6 (6 concurrent) | 67.6 tok/s | 61.4 tok/s (−9%, watch item) |
+| 6 × 61.5K-token prompts (370K tokens KV demand) | zero preemptions | **zero preemptions, 6/6 OK** |
+
+Quality gates at k=7: determinism byte-identical, tool-call JSON clean, native vision verified (inline PNG → correct color). KV pool at k=7: 593K tokens (642K at k=5 — spec length trades pool size; both comfortably exceed max context × 2).
+
+Operational note: our C4 baseline pass *crashed the engine* — first concurrency burst after a fresh boot triggers a TileLang kernel JIT mid-batch that stalled the worker RPC cross-rank into an EngineDeadError. Warm up new batch shapes with small concurrent requests (4 × 32-token gens) before any real concurrency bench on a cold boot. Our watchdog recovered the pair; the relaunch carried the k=7 flag.
+
+### Prefix cache: 0 hits → working (upstream fix, our same-day deployment)
+
+For our lane's entire life, `prefix_cache_hits_total` sat at **zero** across 35,000+ queries — `enable_prefix_caching=True` in config, no reuse in practice. Every agent turn re-prefilled the whole conversation.
+
+Root cause (found by the community, fixed in upstream [PR #18](https://github.com/tonyd2wild/GLM-5.3-Flash-NVFP4-DFlash2-2x-DGX-Spark/pull/18), which repairs [issue #13](https://github.com/tonyd2wild/GLM-5.3-Flash-NVFP4-DFlash2-2x-DGX-Spark/issues/13)): the DFlash2 drafter runs its own KV cache group with a short sliding window. No group was flagged as the EAGLE group, so the coordinator's fallback flagged *every* group — and in `find_longest_cache_hit`, the draft window's short hit replaced the running hit length, collapsing the chain to zero. Identical prompts, block-aligned or not, never hit.
+
+Deployed as a bind-mount overlay (no image rebuild): pull the live `kv_cache_coordinator.py` from the running image, verify the patch's anchors match exactly once, apply the patch to a local copy, run the predicate self-check, add one `-v` mount line to the launcher. One relaunch.
+
+Verification with a block-size-aware probe (5,178-token prompt, sent 3×):
+
+| send | wall | Δ hits |
+|---|---|---|
+| 1 (cold) | 4.30 s | 0 |
+| 2 | 7.31 s | **+4,608** (= `floor(5178/2304)` × 2304 — exactly the complete blocks) |
+| 3 (warm) | **0.71 s** | +4,608 |
+
+Warm re-prefill is now 6.1× faster. Decode throughput unchanged (structured 64.4, prose 28.6 — noise band). Two probe lessons worth publishing: a prompt shorter than the block size (2,304 tokens here) has *zero* cacheable blocks — it will read as broken no matter what; and the commit lands on send 2 on this hybrid-mamba arch, not send 3 as on some lanes.
+
+One caveat on the fix's scope: `--kv-cache-memory` at 6 GiB remains right for us, but the KV pool reading at k=7 is 593K tokens — if you push context hard with concurrency, size against that number, not pass 1's 643K.
 
 ## The five localization fixes (our contribution to the recipe's story)
 
