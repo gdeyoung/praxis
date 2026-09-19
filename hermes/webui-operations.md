@@ -4,6 +4,10 @@ The web interface you actually chat with deserves the same operational disciplin
 
 > Schematic on purpose: paths and ports are ours; the contracts and failure modes are the transferable part.
 
+## Which UI this is (the disambiguation that matters)
+
+Hermes-agent ships a built-in web dashboard, and the ecosystem has several third-party frontends. **This page documents a specific third-party chat WebUI — [nesquena/hermes-webui](https://github.com/nesquena/hermes-webui) — run as a full replacement for the stock panel.** We adopted it deliberately: a chat-first interface (streaming sessions, approvals, inline media, kanban, extensions) serves daily driver use better than the stock dashboard, and its extension system is what makes the no-fork rule below practical. Everything here is written from operating that choice — the stock panel still exists upstream for the use-cases it fits, and the agent core treats both as just another client.
+
 ## The one rule: never fork the primary interface
 
 A chat UI you use every day is a vending machine for upstream improvements: fixes, features, security patches. Every core file you edit is **fork debt** — it blocks `git pull`, rots silently, and converts a one-command update into an archaeology project. Our standing rule: **the primary human interface must never be forked or core-modified — upstream updateability is a hard constraint.** Customization goes through the sanctioned extension surface instead.
