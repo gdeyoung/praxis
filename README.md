@@ -31,6 +31,14 @@ Everything about running the agent platform itself:
 | Doc | What it covers |
 |---|---|
 | [`hermes/fleet-operations.md`](hermes/fleet-operations.md) | Multi-profile fleet patterns: dependency-map discipline, model routing by task shape, autonomous learning loops, change control |
+| [`hermes/litellm-pitfalls.md`](hermes/litellm-pitfalls.md) | **Operating an LLM router proxy in production** — thirty silent-failure modes across config/DB/fallback layers, and the probe that catches each: ghost models, dead-hop masking, timeout-retry token amplification, hot-reload nukes, vendor-edge lies |
+| [`hermes/model-calibration.md`](hermes/model-calibration.md) | Per-model-family prompt blocks injected at the router — grounded behavior fixes for every caller at once, with the A/B that justified rollout and the behavioral-probe method |
+| [`hermes/plugin-seam.md`](hermes/plugin-seam.md) | Small fail-open hooks instead of forking the agent: live-state injection, intent routing, command seatbelt — the contract that makes per-turn plugins safe |
+| [`hermes/core-patches.md`](hermes/core-patches.md) | Five-file patch series carried against the vendored runtime (zero-result search failover, admin-route probe collision, shutdown hygiene) — upstreamable, revertible, no fork |
+| [`hermes/gpu-lane-governance.md`](hermes/gpu-lane-governance.md) | Leases + reapers for shared GPUs: `gpu-take` claims with owners and TTLs, session reservations for pipelines, 14-check regression gate |
+| [`hermes/lan-service-bridges.md`](hermes/lan-service-bridges.md) | LAN services as agent tools — one-file stdio wrappers vs streamable-HTTP bridges, and the probe-before-you-bridge decision rule |
+| [`hermes/cron-at-fleet-scale.md`](hermes/cron-at-fleet-scale.md) | ~100 scheduled jobs: the lock-tombstone lesson, missed-fire detection from the jobs DB, transports matched to attention |
+| [`hermes/fleet-sync.md`](hermes/fleet-sync.md) | One skill tree, many machines: one-way git backup, pull-on-demand skills, per-host trees, role-matched seed packages |
 | [`hermes/delegation-mechanics.md`](hermes/delegation-mechanics.md) | How a parent supervises workers: live transcripts, done-markers, bounded parallelism, YAML-defined councils, when not to delegate |
 | [`hermes/external-harness-wiring.md`](hermes/external-harness-wiring.md) | Wiring an external coding harness (OpenCode/Claude Code/Codex class) as a callable dev subagent — the four-requirement socket |
 | [`hermes/fleet-economics.md`](hermes/fleet-economics.md) | The cost model: owned silicon vs API-only, where cloud is genuinely cheaper, routing rules that stop silent cost drift |
