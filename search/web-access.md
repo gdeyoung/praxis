@@ -1,5 +1,7 @@
 # Tiered web access — routing, fallback, and quality drift
 
+> Related: the runtime-side companion to this policy is the **zero-result failover** patch in [core-patches.md](../hermes/core-patches.md) — a healthz-green backend returning success-with-zero-results for days is the failure mode the tiering alone doesn't catch.
+
 How an agent fleet should touch the web: pick the cheapest tool that works, fall back in order, and detect when your search stack silently rots. Every rule here ran in production for months.
 
 ## The decision tree

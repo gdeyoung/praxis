@@ -31,6 +31,8 @@ Our split lands around **90–95% local tokens / 5–10% cloud spend**. The clou
 
 ## Routing rules that prevent silent cost drift
 
+> The failure modes behind these rules — dead-hop masking, timeout-retry token amplification (5.6×), fallback-chain invisibility — are cataloged in [litellm-pitfalls.md](litellm-pitfalls.md).
+
 Cost drift in an agent fleet is death by a thousand model-choice defaults. Four rules stop it:
 
 1. **Route by task shape, not model name.** Aliases (`local-fast`, `local-heavy`, `cloud-dev`, `embed`) map to implementations. Consumers never hardcode a model, so swapping implementations is a one-line alias change, and cost changes are visible in exactly one place.

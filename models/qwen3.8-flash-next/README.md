@@ -44,6 +44,14 @@ Stacked and measured independently on a second Spark, then promoted after a 24h 
 
 Cumulative from stock NVFP4: **+33% decode at agent context depths** (75k-token median), capacity +21.6%, determinism gained. Prefill:decode is 203:1 in our traffic, so decode gains dominate. Acceptance dips ~12% relative under hybrid (0.76/0.57/0.42 vs 0.81/0.66/0.51) — priced in, net-positive. Env knobs that define the lane: `QWEN4EXP_DRAFT_VOCAB=65536`, `VLLM_FP8_HYBRID=1`, `VLLM_QSA_EXACT_TOPK=1`.
 
+## Proxy-side calibration (2026-09-18)
+
+This lane's fleet deployments now carry a router-injected calibration block
+(per-family prompt prefix, ~110 tokens, merged ahead of the caller's system
+message — every caller at once, cache-safe). For this family the block
+suppresses the two verified failure modes: claiming unverified fixes, and
+thinking-loop tail-chasing. Method + A/B: [model-calibration.md](../../hermes/model-calibration.md).
+
 ## Provenance — where each piece of our recipe comes from
 
 | Component | Origin | License | What we did |

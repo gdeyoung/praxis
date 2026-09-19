@@ -8,6 +8,7 @@ Curated, not comprehensive. Everything here was used on real hardware in this fl
 
 - [blazux/qwen3.8-Flash-DGX](https://github.com/blazux/qwen3.8-Flash-DGX) — single-Spark Qwen3.8-Flash-Next recipe; the hybrid fp8 side-layer conversion writeup is the best quantization-bandwidth analysis we've read
 - [tonyd2wild's repos](https://github.com/tonyd2wild?tab=repositories) — DS4F deployments and Spark tooling (2Wild-Beast, Model-Eval, DeepSeek-Harness series); his config discipline is the standard we hold ourselves to
+- [davidondrej/skills](https://github.com/davidondrej/skills) — dangerous-command denylist patterns (MIT) that we adapted into our global command guard
 - [build.nvidia.com](https://build.nvidia.com) — NVIDIA's Spark/GB10 project hub: firmware, examples, forums where the Spark practitioner community actually lives
 
 ## Checkpoints

@@ -15,6 +15,8 @@ Each profile gets: its own skills dir, its own memory, its own cron. They share:
 
 ## The dependency map (the one practice that matters most)
 
+> The operational companions to this page: [litellm-pitfalls.md](litellm-pitfalls.md) (the proxy's thirty silent-failure modes), [model-calibration.md](model-calibration.md) (per-family prompt blocks at the router), and [plugin-seam.md](plugin-seam.md) (live fleet-state injection per turn).
+
 Every fleet component — model endpoint, service, MCP tool, cron job, script other things call — is a node in a YAML dependency graph with `depends_on` edges. Before ANY change:
 
 1. `depmap impact <id>` — who depends on this?

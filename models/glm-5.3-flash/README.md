@@ -106,6 +106,13 @@ Warm re-prefill is now 6.1× faster. Decode throughput unchanged (structured 64.
 
 One caveat on the fix's scope: `--kv-cache-memory` at 6 GiB remains right for us, but the KV pool reading at k=7 is 593K tokens — if you push context hard with concurrency, size against that number, not pass 1's 643K.
 
+## Proxy-side calibration (2026-09-18)
+
+Fleet deployments of this model now carry a router-injected calibration block
+(thin, tone-only for this family — no prompt-level quirk was verified worth
+correcting; serving-side findings like KV budget are not prompt material).
+Method: [model-calibration.md](../../hermes/model-calibration.md).
+
 ## The five localization fixes (our contribution to the recipe's story)
 
 The recipe works, but it ships *the author's* fabric and workflow. Five things we had to fix — any second deployer hits all five:
