@@ -43,6 +43,7 @@ Everything about running the agent platform itself:
 | [`hermes/delegation-mechanics.md`](hermes/delegation-mechanics.md) | How a parent supervises workers: live transcripts, done-markers, bounded parallelism, YAML-defined councils, when not to delegate |
 | [`hermes/external-harness-wiring.md`](hermes/external-harness-wiring.md) | Wiring an external coding harness (OpenCode/Claude Code/Codex class) as a callable dev subagent — the four-requirement socket |
 | [`hermes/fleet-monitoring.md`](hermes/fleet-monitoring.md) | **Monitoring the fleet** — passive checks, death signatures, UPS forensics, the alert-discipline rules that keep alerts trusted |
+| [`hermes/webui-operations.md`](hermes/webui-operations.md) | **Operating the chat WebUI** — the no-fork rule, extension sidecars over core patches, capped-session recovery, inline media players |
 | [`hermes/fleet-economics.md`](hermes/fleet-economics.md) | The cost model: owned silicon vs API-only, where cloud is genuinely cheaper, routing rules that stop silent cost drift |
 | [`hermes/agent-skill-patterns.md`](hermes/agent-skill-patterns.md) | Seven skill patterns that survived production: decision queue, knowledge preamble, blue-green runtime upgrades, structured handoff, edit-in-place rule, hard escalation, curator separation |
 | [`hermes/knowledge-management/braindb.md`](hermes/knowledge-management/braindb.md) | **BrainDB** — SQLite-native agent memory with vector search, graph traversal, nightly reflection ("dreaming"), and confidence decay |
