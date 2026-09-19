@@ -16,7 +16,7 @@ Most public AI-agent content is either vendor demos or single-session experiment
 | [`agents/`](agents/ROLE-TEMPLATE.md) | **Recreate our fleet** — the [role template](agents/ROLE-TEMPLATE.md) every agent/subagent is defined by |
 | [`hermes/`](hermes/) | **The Hermes fleet** — operating patterns, agent skill patterns, and the full knowledge-management architecture (below) |
 | [`search/`](search/) | [Tiered web access](search/web-access.md) — routing, fallback chains, and quality-drift detection for search backends |
-| [`media/`](media/) | [Verification-gated media generation](media/verification-gates.md) — zero-stumble narration, subtitle constraints, hardware encode, pre-production spend gates |
+| [`media/`](media/) | [Verification-gated media generation](media/verification-gates.md) — zero-stumble narration, subtitle constraints, hardware encode, pre-production spend gates · [Portal platform](media/portal-platform.md) — one Caddy entry, catalog+provenance JSON, static sections, the deploy pitfalls |
 | [`research/`](research/) | [The interest funnel](research/interest-funnel.md) — from a saved-link hoard to an agent that knows what you care about |
 | [`LINKS.md`](LINKS.md) | Curated resources that earned a bookmark: recipes, checkpoints, tools, and the reference posts we actually learned from |
 
