@@ -75,3 +75,8 @@ job list for identical weekday+hour clusters and stagger them; book at the
 schedule layer, because the router has no queue feature. The ambient
 scheduled fleet also doubles as the canary for proxy changes — if all jobs
 stay green after a config edit, the edit didn't hurt anything.
+
+## Related
+
+- [fleet-monitoring.md](fleet-monitoring.md) — the passive-monitoring doctrine and outage triage these jobs implement: death signatures, UPS forensics, alert discipline
+- [litellm-pitfalls.md](litellm-pitfalls.md) — the collision/amplification failure modes behind the stagger rule
