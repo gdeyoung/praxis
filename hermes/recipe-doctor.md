@@ -6,7 +6,10 @@
 > box, the fix works, you never write it down. Six weeks later an update
 > clobbers it and nobody remembers what it was. The doctor closes that loop.
 
-Companion to [fleet-operations.md](fleet-operations.md). ~130 lines of bash, no
+Companion to [fleet-operations.md](fleet-operations.md). The recipe-repo and
+update-safety discipline it audits is written up for Omarchy machines in
+[gdeyoung/omarchy-recipes](https://github.com/gdeyoung/omarchy-recipes).
+~130 lines of bash, no
 dependencies beyond coreutils + `git`. Runs from `/usr/local/bin` (immune to
 package updates), source-of-truth in the recipe repo, installed by the same
 root helper that installs everything else. Never `curl | bash`.

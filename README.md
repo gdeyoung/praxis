@@ -52,6 +52,8 @@ Everything about running the agent platform itself:
 | [`hermes/knowledge-management/learning-workflows.md`](hermes/knowledge-management/learning-workflows.md) | Autonomous learning workflows — the scheduled night-shift learners: fixed 4-unit cycles, tier-ranked persistence, watch lists, self-audit, and the rules that keep ~130 unattended cycles trustworthy |
 - [`sparks/field-notes.md`](sparks/field-notes.md) — DGX Spark ops: power-event failure modes, blue-green model swaps, Docker-vs-native NCCL, cluster pairing
 
+The fleet's desktop layer is documented in its own repo: [gdeyoung/omarchy-recipes](https://github.com/gdeyoung/omarchy-recipes) — recipe-repo discipline, the measured update-overwrite model, and plugin hygiene for Omarchy (Arch + Hyprland) machines.
+
 ## The house rules
 
 1. **Numbers or it didn't happen.** Every performance claim comes with the script that produced it.
