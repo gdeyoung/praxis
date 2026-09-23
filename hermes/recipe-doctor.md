@@ -59,12 +59,20 @@ to ignore alarms. The fix: **notify only when the drift set changes.**
   widget's settings) without the repo snapshots being refreshed. Classic
   recipe rot, invisible until a rebuild.
 - Within 20 minutes of the timer going live it caught a **third-party plugin
-  vanishing from disk** — no package transaction, no shell history, dir simply
-  gone. The doctor noticed and notified before any human would have. (Cause
-  under investigation; the detection is the point.)
+  vanishing from disk** — which turned out to be the gate's own test harness
+  stranding it there: the wrapper exited 1 on drift-found, systemd marked the
+  oneshot *failed*, and the `&&`-chained restore step never ran. The doctor
+  noticed a real anomaly within minutes — the anomaly was us. Detection
+  worked; the exit contract was wrong. (Fix below.)
 
 ## Pitfalls (each one bit during bring-up)
 
+- **Drift-found is not a service failure.** The wrapper around the doctor must
+  exit 0 even when the doctor reports drift. Otherwise systemd marks the
+  oneshot *failed* on the gate's most normal day, and any `&&`-chained
+  cleanup after it silently never runs — which is how our own drift-simulation
+  test stranded a live plugin in `/tmp` for 25 minutes while the doctor
+  correctly screamed about it. Notify/journal, then exit 0.
 - **Empty-input SHA.** `sha256sum` on empty input is
   `e3b0c442...` — a valid hash meaning *zero drift*, not a failure. Don't
   special-case it into an error path; it's your clean-state signature.
