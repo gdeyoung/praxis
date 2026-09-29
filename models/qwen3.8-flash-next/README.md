@@ -24,7 +24,7 @@ Quality gates passed on both layouts: identical greedy continuation on a fixed p
 
 ## Gotchas we hit (the actual content)
 
-1. **The MTP/SSE benchmark trap.** Speculative decoding (MTP k=2) packs 2–3 tokens into each SSE stream chunk. Any benchmark that counts *events* instead of `usage.completion_tokens` reports ~half the real throughput. We watched a stock bench report "11 tok/s" on a 28 tok/s endpoint. **Always trust `usage` from the non-streamed response, never chunk counts.**
+1. **The MTP/SSE benchmark trap.** Speculative decoding (MTP k=2) packs 2–3 tokens into each SSE stream chunk. Any benchmark that counts *events* instead of `usage.completion_tokens` reports ~half the real throughput. We watched a stock bench report "11 tok/s" on a 28 tok/s endpoint. **Always trust `usage` from the non-streamed response, never chunk counts.** See also: [UltraFast adoption field report](ultrafast-adoption.md) — 2026-09-28, we replaced this lane with DimeRhyme's community recipe after a fair-fight bench (+22% median decode).
 2. **Cold boot is ~14 min, not 8–13.** torch.compile cache is cold for the new fp8 graph shapes. Poll `/health`; don't panic at minute 10.
 3. **First big prefill post-boot is unrepresentative** (~900 vs ~1,900 tok/s steady-state). Warm the caches before recording prefill numbers.
 4. **Verify the container env, not the docs.** `VLLM_FP8_HYBRID=1` in `docker inspect` is the ground truth that hybrid mode actually loaded.

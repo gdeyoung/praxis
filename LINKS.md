@@ -4,6 +4,8 @@ Curated, not comprehensive. Everything here was used on real hardware in this fl
 
 ## Serving recipes
 - tonyd2wild — [GLM-5.3-Flash-NVFP4-DFlash2-2x-DGX-Spark](https://github.com/tonyd2wild/GLM-5.3-Flash-NVFP4-DFlash2-2x-DGX-Spark) — the recipe this fleet's [GLM-5.3 deployment](models/glm-5.3-flash/) is built on; seven day-0 fixes, patched SM121 image
+- [dime-online/qwen3.8-Flash-DGX-UltraFast](https://github.com/dime-online/qwen3.8-Flash-DGX-UltraFast) — our current production Flash-Next lane ([adoption report](models/qwen3.8-flash-next/ultrafast-adoption.md)); dense-MTP drafter, +22% over our own NVFP4 recipe on the same hardware
+- [Saren-Arterius/qwen3.8-Flash-DGX-AutoRound](https://github.com/Saren-Arterius/qwen3.8-Flash-DGX-AutoRound) — the W4A16 AutoRound checkpoint + fp8 PLE table under the UltraFast stack
 - RedHatAI — [GLM-5.3-Flash-NVFP4](https://huggingface.co/RedHatAI/GLM-5.3-Flash-NVFP4) — corruption-free NVFP4 checkpoint (DGX Spark / GB10)
 
 - [blazux/qwen3.8-Flash-DGX](https://github.com/blazux/qwen3.8-Flash-DGX) — single-Spark Qwen3.8-Flash-Next recipe; the hybrid fp8 side-layer conversion writeup is the best quantization-bandwidth analysis we've read
