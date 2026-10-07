@@ -1,4 +1,4 @@
-# Knapsack stack adoption: +106% median decode on our TP2 pair
+# knapcio speed stack adoption: +106% median decode on our TP2 pair
 
 **2026-10-07 — the production lane swap from vLLM v11 dflash2 to knapcio's speed stack, measured on our own hardware.**
 
