@@ -1,5 +1,7 @@
 # GLM-5.3-Flash on a 2× DGX Spark cluster
 
+> **[2026-10-07] This stack has been superseded.** The lane now runs knapcio's speed stack (+106% median decode on our pair) — see [knapcio-adoption.md](knapcio-adoption.md). Everything below is the historical record of the v11 dflash2 lane (2026-08-30 → 2026-10-07): the localization fixes, both tuning passes, and the prefix-cache repair remain valid reference material.
+
 Our production deployment record for GLM-5.3-Flash (NVFP4, 320B-class MoE) served with vLLM TP2 across two DGX Spark boxes. The recipe and container image are **[@tonyd2wild](https://github.com/tonyd2wild)'s** — [GLM-5.3-Flash-NVFP4-DFlash2-2x-DGX-Spark](https://github.com/tonyd2wild/GLM-5.3-Flash-NVFP4-DFlash2-2x-DGX-Spark), a world-first deploy recipe with seven day-0 bugs fixed and a patched SM121 image. What this page adds: an independent deployment on someone else's fabric, five localization fixes any second deployer will hit, and our own measured numbers.
 
 ## What's running
