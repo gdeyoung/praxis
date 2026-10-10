@@ -1,3 +1,5 @@
+> **2026-10-10 update:** the checkpoint under this stack has since been swapped to the uncensored Blackfrost DERISKED build with the dense-MLP layout fix — see [blackfrost-derisked-swap.md](blackfrost-derisked-swap.md). The stack, image, drafter, and numbers on this page remain the historical record of the 10-07 swap.
+
 # knapcio speed stack adoption: +106% median decode on our TP2 pair
 
 **2026-10-07 — the production lane swap from vLLM v11 dflash2 to knapcio's speed stack, measured on our own hardware.**
