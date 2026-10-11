@@ -70,3 +70,4 @@ We keep a full off-node backup of the lane artifacts (overlays, launch/rollback 
 
 - [`benchmarks/`](benchmarks/) — the measurement scripts and methodology (usage-based counting, T=0 determinism check, prefix-cache probe)
 - [`verification/`](verification/) — the pre-deployment gate: coherence, determinism, tool-call, LiteLLM/router round-trip
+- [`abliterated-requant.md`](abliterated-requant.md) — 2026-10-11: the lane moved to huihui's abliteration requantized to the stock 3.05bpw EXL3 allocation (integer-pinned recipe; converter-era traps and the validation battery in the [public recipe repo](https://github.com/gdeyoung/qfn-abl-exl3))
