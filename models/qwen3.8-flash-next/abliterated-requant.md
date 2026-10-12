@@ -2,7 +2,8 @@
 
 2026-10-11 — huihui-ai's Qwen3.8-Flash-Next abliteration requantized to the stock 3.05bpw
 EXL3 allocation, cut over on both Spark velo lanes. Public artifacts:
-[recipe repo](https://github.com/gdeyoung/qfn-abl-exl3) · weights on HF (pending upload).
+[recipe repo](https://github.com/gdeyoung/qfn-abl-exl3) ·
+[weights](https://huggingface.co/gdeyoung/Huihui-Qwen3.8-Flash-Next-abliterated-EXL3-3.05bpw-integer).
 Build log: `vault fleet/builds/qwen38fn-abl-3bpw-requant-2026-10-11.md`.
 
 ## The class-level lesson
